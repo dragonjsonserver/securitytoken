@@ -1,0 +1,24 @@
+{
+    "name": "dragonprojects/dragonjsonserversecuritytoken",
+    "description": "Extension for DragonJsonServer to secure API namespaces with securitytokens",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Christoph Herrmann",
+            "email": "developer@dragonprojects.de",
+            "homepage": "http://dragonjsonserver.de/",
+            "role": "Developer"
+        }
+    ],
+    "homepage": "http://dragonjsonserver.de/",
+    "require": {
+        "php": ">=5.4.0",
+        "zendframework/zendframework": "2.*",
+        "dragonprojects/dragonjsonserver": "dev-master"
+    },
+    "autoload": {
+        "classmap": [
+            "Module.php"
+        ]
+    }
+}
