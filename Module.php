@@ -22,4 +22,19 @@ class Module
     {
         return require __DIR__ . '/config/module.config.php';
     }
+
+    /**
+     * Gibt die Autoloaderkonfiguration des Moduls zurück
+     * @return array
+     */
+    public function getAutoloaderConfig()
+    {
+        return [
+            'Zend\Loader\StandardAutoloader' => [
+                'namespaces' => [
+                    __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
+                ],
+            ],
+        ];
+    }
 }

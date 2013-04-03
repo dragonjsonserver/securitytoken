@@ -17,6 +17,9 @@
         "dragonprojects/dragonjsonserver": "dev-master"
     },
     "autoload": {
+        "psr-0": {
+            "DragonJsonServerSecuritytoken": "src/"
+        },
         "classmap": [
             "Module.php"
         ]
