@@ -51,8 +51,7 @@ class Module
     		function (\DragonJsonServer\Event\Request $request) {
     			$method = $request->getRequest()->getMethod();
     			foreach ($this->getServiceManager()->get('Config')['securitytokens'] as $namespace => $securitytoken) {
-    				$namespace .= '.';
-    				if (substr($method, 0, strlen($namespace)) != $namespace) {
+    				if (substr($method, 0, strlen($namespace . '.')) != $namespace . '.') {
     					continue;
     				}
     				if ($request->getRequest()->getParam('securitytoken') != $securitytoken) {
