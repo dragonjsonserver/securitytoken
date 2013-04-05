@@ -14,6 +14,8 @@ namespace DragonJsonServerSecuritytoken;
  */
 class Module
 {
+	use \DragonJsonServer\ServiceManagerTrait;
+	
     /**
      * Gibt die Konfiguration des Moduls zurück
      * @return array
@@ -48,7 +50,7 @@ class Module
     	$sharedManager->attach('DragonJsonServer\Service\Server', 'request', 
     		function (\DragonJsonServer\Event\Request $request) {
     			$method = $request->getRequest()->getMethod();
-    			foreach ($request->getServiceManager()->get('Config')['securitytokens'] as $namespace => $securitytoken) {
+    			foreach ($this->getServiceManager()->get('Config')['securitytokens'] as $namespace => $securitytoken) {
     				$namespace .= '.';
     				if (substr($method, 0, strlen($namespace)) != $namespace) {
     					continue;
@@ -61,7 +63,7 @@ class Module
     	);
     	$sharedManager->attach('DragonJsonServer\Service\Server', 'servicemap', 
     		function (\DragonJsonServer\Event\Servicemap $servicemap) {
-	    		$securitytokens = $servicemap->getServiceManager()->get('Config')['securitytokens'];
+	    		$securitytokens = $this->getServiceManager()->get('Config')['securitytokens'];
 		        foreach ($servicemap->getServicemap()->getServices() as $method => $service) {
 		        	foreach ($securitytokens as $namespace => $securitytoken) {
 		    			$namespace .= '.';
