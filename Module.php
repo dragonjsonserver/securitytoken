@@ -48,22 +48,23 @@ class Module
     {
     	$sharedManager = $moduleManager->getEventManager()->getSharedManager();
     	$sharedManager->attach('DragonJsonServer\Service\Server', 'request', 
-    		function (\DragonJsonServer\Event\Request $request) {
-    			$method = $request->getRequest()->getMethod();
+    		function (\DragonJsonServer\Event\Request $eventRequest) {
+    			$request = $eventRequest->getRequest();
+    			$method = $request->getMethod();
     			foreach ($this->getServiceManager()->get('Config')['securitytokens'] as $namespace => $securitytoken) {
     				if (substr($method, 0, strlen($namespace . '.')) != $namespace . '.') {
     					continue;
     				}
-    				if ($request->getRequest()->getParam('securitytoken') != $securitytoken) {
+    				if ($request->getParam('securitytoken') != $securitytoken) {
     					throw new \DragonJsonServer\Exception('incorrect securitytoken', ['namespace' => $namespace]);
     				}
     			}
     		}		
     	);
     	$sharedManager->attach('DragonJsonServer\Service\Server', 'servicemap', 
-    		function (\DragonJsonServer\Event\Servicemap $servicemap) {
+    		function (\DragonJsonServer\Event\Servicemap $eventServicemap) {
 	    		$securitytokens = $this->getServiceManager()->get('Config')['securitytokens'];
-		        foreach ($servicemap->getServicemap()->getServices() as $method => $service) {
+		        foreach ($eventServicemap->getServicemap()->getServices() as $method => $service) {
 		        	foreach ($securitytokens as $namespace => $securitytoken) {
 		    			$namespace .= '.';
 		        		if (substr($method, 0, strlen($namespace)) != $namespace) {
