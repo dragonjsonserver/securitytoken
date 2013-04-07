@@ -1,6 +1,6 @@
 {
     "name": "dragonprojects/dragonjsonserversecuritytoken",
-    "description": "Extension for DragonJsonServer to secure API namespaces with securitytokens",
+    "description": "Erweiterung für den DragonJsonServer zum Absichern von API Namensräumen mit Securitytokens",
     "license": "BSD-3-Clause",
     "authors": [
         {
