@@ -56,7 +56,7 @@ class Module
     					continue;
     				}
     				if ($request->getParam('securitytoken') != $securitytoken) {
-    					throw new \DragonJsonServer\Exception('incorrect securitytoken', ['namespace' => $namespace]);
+    					throw new \DragonJsonServer\Exception('invalid securitytoken', ['namespace' => $namespace]);
     				}
     			}
     		}		
