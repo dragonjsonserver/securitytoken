@@ -11,8 +11,10 @@
  * @return array
  */
 return [
-    'securitytokens' => [
-    	'%namespace%' => '%securitytoken%',
-    	'%namespace%' => '%securitytoken%',
-    ],
+	'dragonjsonserversecuritytoken' => [
+	    'securitytokens' => [
+	    	'%namespace%' => '%securitytoken%',
+	    	'%namespace%' => '%securitytoken%',
+	    ],
+	],
 ];

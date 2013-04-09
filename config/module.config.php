@@ -11,5 +11,7 @@
  * @return array
  */
 return [
-    'securitytokens' => [],
+	'dragonjsonserversecuritytoken' => [
+    	'securitytokens' => [],
+    ],
 ];

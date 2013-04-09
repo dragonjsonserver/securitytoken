@@ -51,7 +51,8 @@ class Module
     		function (\DragonJsonServer\Event\Request $eventRequest) {
     			$request = $eventRequest->getRequest();
     			$method = $request->getMethod();
-    			foreach ($this->getServiceManager()->get('Config')['securitytokens'] as $namespace => $securitytoken) {
+    			$securitytokens = $this->getServiceManager()->get('Config')['dragonjsonserversecuritytoken']['securitytokens'];
+    			foreach ($securitytokens as $namespace => $securitytoken) {
     				if (substr($method, 0, strlen($namespace . '.')) != $namespace . '.') {
     					continue;
     				}
@@ -63,7 +64,7 @@ class Module
     	);
     	$sharedManager->attach('DragonJsonServer\Service\Server', 'servicemap', 
     		function (\DragonJsonServer\Event\Servicemap $eventServicemap) {
-	    		$securitytokens = $this->getServiceManager()->get('Config')['securitytokens'];
+	    		$securitytokens = $this->getServiceManager()->get('Config')['dragonjsonserversecuritytoken']['securitytokens'];
 		        foreach ($eventServicemap->getServicemap()->getServices() as $method => $service) {
 		        	foreach ($securitytokens as $namespace => $securitytoken) {
 		    			$namespace .= '.';
